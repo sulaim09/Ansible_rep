@@ -1,0 +1,29 @@
+- name: EXample Playbook level ### {String varibale example }
+  hosts: all
+  become: true
+  vars_files: 
+         - /home/ec2-user/var.yml ## path assingh
+#  vars:  we will use spearate in file
+#         web: httpd
+#          web_root: /var/www/html
+        
+  tasks:  
+        - name: Install web server
+          yum: 
+              name: "{{ web }}"
+              state: Installed
+        - name: Start
+          service: 
+                name: "{{ web}}" 
+                state: started 
+                enabled: true
+
+        - name: Create " {{web_root}}"  directory
+          file: 
+                path: "{{web_root}}"
+                state: directory
+          ######## well come to server  
+        - name: Create index.html page "{{web_root}}" 
+          copy:
+               content: "hello ansible"
+               dest: "{{web_root }}/index.html"
