@@ -1,0 +1,12 @@
+- name: Example PlayBook Level ## {list types variable}
+  hosts: all
+  become: true
+  vars:
+         - httpd
+         - vsftpd
+         - wget
+  tasks:
+       - name: install web services
+         yum: 
+            name: "{{mypkg}}"
+            state: installed
