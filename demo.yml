@@ -1,0 +1,28 @@
+- name: Deploying   Web -server
+  hosts: web
+  gather_facts: false
+  tasks:
+     - name: create directory /tmp/test
+       file:
+         path: /tmp/test
+         state: directory
+
+     - name: copy etc/fstab into /tmp/test 
+       copy:
+          src: /etc/fstab
+          dest: /tmp/test
+          mode: 0755
+
+- name: Deploy dev server   this is multiple means diffrent place task perform
+  hosts: dev
+  tasks: 
+     - name: installed dev 
+       yum:
+         name:
+           - httpd
+         state: installed
+     - name: start httpd 
+       service: 
+        name: httpd
+        state: started
+        enabled: true
