@@ -1,0 +1,35 @@
+Install the httpd server.
+Enable and start the httpd service in your webservers managed hosts' group.
+Install git on all managed hosts.
+The playbook may look something like this:
+
+---
+- hosts: webservers
+  remote_user: ansible
+  become: yes
+  tasks:
+  - name: Installing apache
+    yum:
+      name: httpd
+      state: latest
+  - name: Enabling httpd service
+    service:
+      name: httpd
+      enabled: yes
+    notify:
+      - name: restart httpd
+  handlers:
+  - name: restart httpd
+    service:
+      name: httpd
+      state: restarted
+
+- hosts: all
+  remote_user: ansible
+  become: yes
+  tasks:
+  - name: Installing git
+    yum:
+      name: git
+      state: latest
+In the above example, you performed two plays in one playbook. Read more about Ansible playbooks here.
