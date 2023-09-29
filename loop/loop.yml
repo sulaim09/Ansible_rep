@@ -1,0 +1,14 @@
+---
+- name: PlayBook for loop demo
+  hosts: all
+  become: yes
+  tasks:
+    - name: Installing  Packages
+      yum:
+         name: "{{ item }}"
+         state: present
+      with_items:
+        - httpd
+        - tree
+        - vsftpd 
+        - mysql  
