@@ -1,0 +1,9 @@
+- name:
+  hosts: web
+  become: yes
+  tasks:
+       - name: error handling demo
+         command: touch /tmp/task/task1.txt
+
+       - name: second tasks
+         command: touch /tmp/task2.txt  
