@@ -1,0 +1,15 @@
+---
+- name: all
+  hosts: dev
+  become: yes
+  tasks:
+     - name: install httpd
+       yum:
+          name: httpd
+          state: latest
+       notify:  restart httpd
+  handlers:
+  - name: restart httpd
+    service:
+      name: httpd
+      state: restarted
