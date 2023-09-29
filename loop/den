@@ -1,0 +1,10 @@
+- name: Example OF command Line Varible
+  hosts: all
+  become: true
+  tasks:
+       - name: ad user and apply Password
+         user:
+               name: "{{ us }}" 
+               state: present
+               password: "{{ pw }} "
+                 
